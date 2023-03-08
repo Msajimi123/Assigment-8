@@ -34,7 +34,7 @@ public class Assignment8 {
 					case 'A': //Calculate the sum of all elements in an array of doubles
 						System.out.print("Enter numbers (0 to finish): ");
 						double[] listToCalc = parseDoubles(stdin);
-						sumA = CalcSumArray(listToCalc);
+						sumA = CalcSumArray(listToCalc, listToCalc.length);
 						System.out.print("Sum of elements in array: " + sumA + "\n");
 						break;
 					
@@ -75,8 +75,12 @@ public class Assignment8 {
 
 	// A: recursive method that calculates the sum of all elements in an array of
 	// doubles and returns the sum
-	public static double CalcSumArray(double[] list) {
-		
+	public static double CalcSumArray(double[] list, int n) {
+		if (n <= 0) {
+			return 0;
+		}
+		return (CalcSumArray(list, n - 1) + list[n - 1]);
+
 	}
 
 
