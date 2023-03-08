@@ -32,15 +32,16 @@ public class Assignment8 {
 
 				switch(inputOpt) {
 					case 'A': //Calculate the sum of all elements in an array of doubles
-						System.out.print("Enter numbers (0 to finish): ");
+						System.out.print("Enter numbers (0 to finish):\n");
 						double[] listToCalc = parseDoubles(stdin);
-						sumA = CalcSumArray(listToCalc);
+						sumA = CalcSumArray(listToCalc, 0);
 						System.out.print("Sum of elements in array: " + sumA + "\n");
 						break;
 					
 					case 'B': //Calculate the sum of all integers between two numbers (including the two numbers)
 						System.out.print("Enter the first number: ");
 						numB1 = readInteger(stdin);
+						System.out.print("Enter the second number: ");
 						numB2 = readInteger(stdin);
 						sumB = CalcSumAtoB(numB1, numB2);
 						System.out.print("The sum of all integers between " + numB1 + " and " + numB2 + " is: " + sumB + "\n");
@@ -49,7 +50,8 @@ public class Assignment8 {
 					case 'C':
 						System.out.print("Enter an integer to factorize: ");
 						numC = readInteger(stdin);
-						resultC = NumAFactorize(numC);
+						resultC = NumAPrimeFactorize(numC, 2);
+						resultC = resultC.substring(0, resultC.lastIndexOf("x"));
 						System.out.print("The prime factorization of " + numC + " is: " + resultC + "\n");
 						break;
 
@@ -59,6 +61,10 @@ public class Assignment8 {
 						System.out.print("Please enter substring to remove: ");
 						inputD2 = stdin.readLine().trim();
 						resultD = RemoveSubStr(inputD1, inputD2);
+						System.out.print("String after substring removal: " + resultD);
+						break;
+					
+					case 'E':
 						break;
 
 					default:
@@ -75,25 +81,53 @@ public class Assignment8 {
 
 	// A: recursive method that calculates the sum of all elements in an array of
 	// doubles and returns the sum
-	public static double CalcSumArray(double[] list) {
-		
-	}
+	public static double CalcSumArray(double[] list, int index) {
+		if (index >= list.length) {
+			return 0.0;
+		} else {
+			double firstNum = list[index];
+			double restSum = CalcSumArray(list, index + 1);
+			return firstNum + restSum;
+		}
 
+	}
 
 	// B: recursive method that calculates the sum of all integers between two
 	// numbers (including the two numbers) and returns the sum
 	public static int CalcSumAtoB(int one, int two) {
-
+		int diff = two - one;
+		if(diff + 1 == 0) {
+			return 0;
+		} else {
+			int firstNum = one;
+			int restSum = CalcSumAtoB(one + 1, two);
+			return firstNum + restSum;
+		}
 	}
 
 	// C: recursive method that calculates the prime factorization of an integer and returns a string as a result
-	public static String NumAFactorize(int one) {
-
+	public static String NumAPrimeFactorize(int num, int factor) {
+		//Base Case
+		if (num < 2) {
+			return "";
+		} else if (num % factor == 0) {
+			return factor + "x" + NumAPrimeFactorize(num/factor, factor);
+		} else {
+			return NumAPrimeFactorize(num, factor + 1);
+		}
 	}
 
 	// D: recursive method that removes all occurrences of a specified substring in a string and returns the result string
-	public static String RemoveSubStr(String remove, String needToRemove) {
-
+	public static String RemoveSubStr(String targetString, String needToRemove) {
+		//Base Case
+		String resultTemp;
+		if (targetString.contains(needToRemove) == false) {
+			return targetString;
+		} else {
+			resultTemp = targetString.substring(0, targetString.indexOf(needToRemove)) + 
+			targetString.substring(targetString.indexOf(needToRemove) + needToRemove.length(), targetString.length());
+			return RemoveSubStr(resultTemp, needToRemove);
+		}
 	}
 
 	// ----------------------------------------------------------------------------------------
