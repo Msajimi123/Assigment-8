@@ -1,8 +1,8 @@
 //Assignment #: Arizona State University Spring 2023 CSE205 #8
-//Name: 
-//StudentID: 
-//Lecture: 
-//Description:
+//Name: Joshua Nguyen
+//StudentID: 1224876042
+//Lecture: TTh 4:30
+//Description: Assignment 8
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -69,6 +69,7 @@ public class Assignment8 {
 
 					default:
 						System.out.print("Please choose a character between A and E.\n");
+						printMenu();
 						break;
 
 				}
