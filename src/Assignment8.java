@@ -32,7 +32,7 @@ public class Assignment8 {
 
 				switch(inputOpt) {
 					case 'A': //Calculate the sum of all elements in an array of doubles
-						System.out.print("Enter numbers (0 to finish): ");
+						System.out.print("Enter numbers (0 to finish):\n");
 						double[] listToCalc = parseDoubles(stdin);
 						sumA = CalcSumArray(listToCalc, 0);
 						System.out.print("Sum of elements in array: " + sumA + "\n");
@@ -41,6 +41,7 @@ public class Assignment8 {
 					case 'B': //Calculate the sum of all integers between two numbers (including the two numbers)
 						System.out.print("Enter the first number: ");
 						numB1 = readInteger(stdin);
+						System.out.print("Enter the second number: ");
 						numB2 = readInteger(stdin);
 						sumB = CalcSumAtoB(numB1, numB2);
 						System.out.print("The sum of all integers between " + numB1 + " and " + numB2 + " is: " + sumB + "\n");
@@ -59,6 +60,9 @@ public class Assignment8 {
 						System.out.print("Please enter substring to remove: ");
 						inputD2 = stdin.readLine().trim();
 						resultD = RemoveSubStr(inputD1, inputD2);
+						break;
+					
+					case 'E':
 						break;
 
 					default:
@@ -89,7 +93,14 @@ public class Assignment8 {
 	// B: recursive method that calculates the sum of all integers between two
 	// numbers (including the two numbers) and returns the sum
 	public static int CalcSumAtoB(int one, int two) {
-
+		int diff = two - one;
+		if(diff + 1 == 0) {
+			return 0;
+		} else {
+			int firstNum = one;
+			int restSum = CalcSumAtoB(one + 1, two);
+			return firstNum + restSum;
+		}
 	}
 
 	// C: recursive method that calculates the prime factorization of an integer and returns a string as a result
