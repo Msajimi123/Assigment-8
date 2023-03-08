@@ -50,7 +50,8 @@ public class Assignment8 {
 					case 'C':
 						System.out.print("Enter an integer to factorize: ");
 						numC = readInteger(stdin);
-						resultC = NumAFactorize(numC);
+						resultC = NumAPrimeFactorize(numC, 2);
+						resultC = resultC.substring(0, resultC.lastIndexOf("x"));
 						System.out.print("The prime factorization of " + numC + " is: " + resultC + "\n");
 						break;
 
@@ -104,8 +105,15 @@ public class Assignment8 {
 	}
 
 	// C: recursive method that calculates the prime factorization of an integer and returns a string as a result
-	public static String NumAFactorize(int one) {
-
+	public static String NumAPrimeFactorize(int num, int factor) {
+		//Base Case
+		if (num < 2) {
+			return "";
+		} else if (num % factor == 0) {
+			return factor + "x" + NumAPrimeFactorize(num/factor, factor);
+		} else {
+			return NumAPrimeFactorize(num, factor + 1);
+		}
 	}
 
 	// D: recursive method that removes all occurrences of a specified substring in a string and returns the result string
