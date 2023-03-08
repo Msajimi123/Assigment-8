@@ -61,6 +61,7 @@ public class Assignment8 {
 						System.out.print("Please enter substring to remove: ");
 						inputD2 = stdin.readLine().trim();
 						resultD = RemoveSubStr(inputD1, inputD2);
+						System.out.print("String after substring removal: " + resultD);
 						break;
 					
 					case 'E':
@@ -117,8 +118,16 @@ public class Assignment8 {
 	}
 
 	// D: recursive method that removes all occurrences of a specified substring in a string and returns the result string
-	public static String RemoveSubStr(String remove, String needToRemove) {
-
+	public static String RemoveSubStr(String targetString, String needToRemove) {
+		//Base Case
+		String resultTemp;
+		if (targetString.contains(needToRemove) == false) {
+			return targetString;
+		} else {
+			resultTemp = targetString.substring(0, targetString.indexOf(needToRemove)) + 
+			targetString.substring(targetString.indexOf(needToRemove) + needToRemove.length(), targetString.length());
+			return RemoveSubStr(resultTemp, needToRemove);
+		}
 	}
 
 	// ----------------------------------------------------------------------------------------
